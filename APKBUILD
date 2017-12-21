@@ -3,7 +3,7 @@
 pkgname=php5-composer
 _pkgrealname=composer
 pkgver=1.1.3
-pkgrel=0
+pkgrel=1
 pkgdesc="Dependency Manager for PHP"
 url="https://getcomposer.org"
 arch="noarch"
