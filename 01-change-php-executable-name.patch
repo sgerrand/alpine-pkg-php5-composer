@@ -1,0 +1,36 @@
+diff --git a/bin/compile b/bin/compile
+index a2720a9..c4aa524 100755
+--- a/bin/compile
++++ b/bin/compile
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env php
++#!/usr/bin/env php5
+ <?php
+ 
+ $cwd = getcwd();
+@@ -10,9 +10,9 @@ if (!is_numeric($ts)) {
+ }
+ // Install with the current version to force it having the right ClassLoader version
+ // Install without dev packages to clean up the included classmap from phpunit classes
+-shell_exec('php bin/composer config autoloader-suffix ComposerPhar' . $ts);
+-shell_exec('php bin/composer install -q --no-dev');
+-shell_exec('php bin/composer config autoloader-suffix --unset');
++shell_exec('php5 bin/composer config autoloader-suffix ComposerPhar' . $ts);
++shell_exec('php5 bin/composer install -q --no-dev');
++shell_exec('php5 bin/composer config autoloader-suffix --unset');
+ chdir($cwd);
+ 
+ require __DIR__.'/../src/bootstrap.php';
+diff --git a/src/Composer/Compiler.php b/src/Composer/Compiler.php
+index 6fccb8e..c051db7 100644
+--- a/src/Composer/Compiler.php
++++ b/src/Composer/Compiler.php
+@@ -242,7 +242,7 @@ private function stripWhitespace($source)
+     private function getStub()
+     {
+         $stub = <<<'EOF'
+-#!/usr/bin/env php
++#!/usr/bin/env php5
+ <?php
+ /*
+  * This file is part of Composer.

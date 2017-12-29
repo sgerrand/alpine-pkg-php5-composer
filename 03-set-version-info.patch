@@ -1,36 +1,8 @@
-diff --git a/bin/compile b/bin/compile
-index a2720a9..ccf2a8d 100755
---- a/bin/compile
-+++ b/bin/compile
-@@ -1,18 +1,14 @@
--#!/usr/bin/env php
-+#!/usr/bin/env php5
- <?php
- 
- $cwd = getcwd();
- chdir(__DIR__.'/../');
--$ts = rtrim(shell_exec('git log -n1 --pretty=%ct HEAD'));
--if (!is_numeric($ts)) {
--    echo 'Could not detect date using "git log -n1 --pretty=%ct HEAD"'.PHP_EOL;
--    exit(1);
--}
-+$ts = '1466952128';
- // Install with the current version to force it having the right ClassLoader version
- // Install without dev packages to clean up the included classmap from phpunit classes
--shell_exec('php bin/composer config autoloader-suffix ComposerPhar' . $ts);
--shell_exec('php bin/composer install -q --no-dev');
--shell_exec('php bin/composer config autoloader-suffix --unset');
-+shell_exec('php5 bin/composer config autoloader-suffix ComposerPhar' . $ts);
-+shell_exec('php5 bin/composer install -q --no-dev');
-+shell_exec('php5 bin/composer config autoloader-suffix --unset');
- chdir($cwd);
- 
- require __DIR__.'/../src/bootstrap.php';
 diff --git a/src/Composer/Compiler.php b/src/Composer/Compiler.php
-index 69e98e9..6ddc00f 100644
+index 6fccb8e..383c502 100644
 --- a/src/Composer/Compiler.php
 +++ b/src/Composer/Compiler.php
-@@ -43,32 +43,10 @@ public function compile($pharFile = 'composer.phar')
+@@ -43,32 +43,9 @@ public function compile($pharFile = 'composer.phar')
              unlink($pharFile);
          }
  
@@ -46,8 +18,7 @@ index 69e98e9..6ddc00f 100644
 -        }
 -
 -        $this->versionDate = new \DateTime(trim($process->getOutput()));
-+        $this->version = '30ab6f1c1753267d181839142fafe022313c3c9a';
-+        $this->versionDate = new \DateTime('2016-06-26 15:42:08 +0100');
++        $this->versionDate = new \DateTime('2017-12-18 13:09:18 +0000');
          $this->versionDate->setTimezone(new \DateTimeZone('UTC'));
 -
 -        $process = new Process('git describe --tags --exact-match HEAD');
@@ -62,16 +33,7 @@ index 69e98e9..6ddc00f 100644
 -                $this->branchAliasVersion = $localConfig['extra']['branch-alias']['dev-master'];
 -            }
 -        }
-+        $this->version = '1.1.3';
++        $this->version = '1.5.6';
  
          $phar = new \Phar($pharFile, 0, 'composer.phar');
          $phar->setSignatureAlgorithm(\Phar::SHA1);
-@@ -228,7 +206,7 @@ private function stripWhitespace($source)
-     private function getStub()
-     {
-         $stub = <<<'EOF'
--#!/usr/bin/env php
-+#!/usr/bin/env php5
- <?php
- /*
-  * This file is part of Composer.

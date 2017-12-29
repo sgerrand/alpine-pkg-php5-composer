@@ -1,0 +1,17 @@
+diff --git a/bin/compile b/bin/compile
+index a2720a9..a2f5645 100755
+--- a/bin/compile
++++ b/bin/compile
+@@ -3,11 +3,7 @@
+ 
+ $cwd = getcwd();
+ chdir(__DIR__.'/../');
+-$ts = rtrim(shell_exec('git log -n1 --pretty=%ct HEAD'));
+-if (!is_numeric($ts)) {
+-    echo 'Could not detect date using "git log -n1 --pretty=%ct HEAD"'.PHP_EOL;
+-    exit(1);
+-}
++$ts = '1513595358';
+ // Install with the current version to force it having the right ClassLoader version
+ // Install without dev packages to clean up the included classmap from phpunit classes
+ shell_exec('php bin/composer config autoloader-suffix ComposerPhar' . $ts);
