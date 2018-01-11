@@ -15,7 +15,7 @@ The current installation method for these packages is to pull them in using
 `wget` or `curl` and install the local file with `apk`:
 
     apk --no-cache add ca-certificates wget
-    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-php5-composer/master/sgerrand.rsa.pub
+    wget --quiet --output-document=/etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
     wget https://github.com/sgerrand/alpine-pkg-php5-composer/releases/download/1.6.2-r0/php5-composer-1.6.2-r0.apk
     apk add --no-cache php5-composer-1.6.2-r0.apk
 
