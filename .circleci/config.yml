@@ -11,10 +11,7 @@ jobs:
           command: |
             docker create --name input --volume /home/builder/package alpine:3.7 /bin/true
             docker create --name output --volume /packages alpine:3.7 /bin/true
-            docker cp ./APKBUILD input:/home/builder/package/
-            docker cp ./01-*.patch input:/home/builder/package/
-            docker cp ./02-*.patch input:/home/builder/package/
-            docker cp ./03-*.patch input:/home/builder/package/
+            docker cp . input:/home/builder/package/
       - run:
           name: Build packages
           command: |
